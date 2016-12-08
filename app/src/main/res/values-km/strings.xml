@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">eClass</string>
+
+    <string name="name">ឈ្មោះ</string>
+    <string name="phone">ទូរស័ព្ទ</string>
+    <string name="email">អ៊ីម៉េល</string>
+    <string name="major">មុខជំនាញ</string>
+    <string name="address">អាស័យដ្ឋាន</string>
+
+    <!-- Action -->
+    <string name="signup">ចុះឈ្មោះ</string>
+
+</resources>
