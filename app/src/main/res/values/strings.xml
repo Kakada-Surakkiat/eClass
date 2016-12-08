@@ -9,5 +9,9 @@
 
     <!-- Action -->
     <string name="signup">Signup</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="edit">Edit</string>
+    <string name="logout">Logout</string>
 
 </resources>
