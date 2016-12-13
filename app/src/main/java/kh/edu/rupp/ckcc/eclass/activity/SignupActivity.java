@@ -1,4 +1,4 @@
-package kh.edu.rupp.ckcc.eclass;
+package kh.edu.rupp.ckcc.eclass.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import java.util.Locale;
+
+import kh.edu.rupp.ckcc.eclass.R;
 
 /**
  * eClass

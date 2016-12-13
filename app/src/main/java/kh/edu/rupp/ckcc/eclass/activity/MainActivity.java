@@ -1,5 +1,7 @@
-package kh.edu.rupp.ckcc.eclass;
+package kh.edu.rupp.ckcc.eclass.activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -7,10 +9,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.Volley;
+import com.facebook.Profile;
+import com.facebook.login.LoginManager;
+
+import kh.edu.rupp.ckcc.eclass.R;
 import kh.edu.rupp.ckcc.eclass.view.NavHeaderView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavHeaderView.OnNavHeaderItemClick, NavigationView.OnNavigationItemSelectedListener {
@@ -40,8 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        navHeaderView.setUsername("CKCC");
-        navHeaderView.setImage(R.drawable.ic_profile);
+        setUserInfo();
 
     }
 
@@ -57,7 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onLogoutClick() {
-
+        Log.d("ckcc", "onLogoutClick");
+        LoginManager.getInstance().logOut();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     @Override
@@ -81,4 +97,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         return false;
     }
+
+    private void setUserInfo(){
+        Profile profile = Profile.getCurrentProfile();
+        navHeaderView.setUsername(profile.getName());
+        String profileImageUrl = profile.getProfilePictureUri(120, 120).toString();
+        ImageRequest imageRequest = new ImageRequest(profileImageUrl, new Response.Listener<Bitmap>() {
+            @Override
+            public void onResponse(Bitmap response) {
+                navHeaderView.setImage(response);
+            }
+        }, 0, 0, ImageView.ScaleType.CENTER_INSIDE, Bitmap.Config.RGB_565, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(imageRequest);
+    }
+
 }
