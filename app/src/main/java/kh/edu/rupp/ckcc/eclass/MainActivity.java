@@ -15,10 +15,9 @@ import kh.edu.rupp.ckcc.eclass.view.NavHeaderView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavHeaderView.OnNavHeaderItemClick, NavigationView.OnNavigationItemSelectedListener {
 
-    private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle drawerToggle;
-    private NavigationView navigationView;
     private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
     private NavHeaderView navHeaderView;
 
     @Override
@@ -30,15 +29,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigationview);
         navigationView.setNavigationItemSelectedListener(this);
         navHeaderView = new NavHeaderView(this);
         navHeaderView.setOnNavHeaderItemClick(this);
         navigationView.addHeaderView(navHeaderView);
 
-        drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
+        drawerToggle.syncState();
 
         navHeaderView.setUsername("CKCC");
         navHeaderView.setImage(R.drawable.ic_profile);
