@@ -2,8 +2,10 @@ package kh.edu.rupp.ckcc.eclass.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -33,14 +35,21 @@ public class LoginActivity extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(this);
 
-        if(Profile.getCurrentProfile() == null){
-            setContentView(R.layout.activity_login);
-            LoginButton loginButton = (LoginButton)findViewById(R.id.btn_fb_login);
-            loginButton.setReadPermissions("public_profile", "email", "user_birthday");
-            registerFacebookCallback();
-        }else{
-            startMainActivity();
-        }
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                if (Profile.getCurrentProfile() == null) {
+                    Log.d("ckcc", "Profile is null");
+                    setContentView(R.layout.activity_login);
+                    LoginButton loginButton = (LoginButton) findViewById(R.id.btn_fb_login);
+                    loginButton.setReadPermissions("public_profile", "email", "user_birthday", "user_friends");
+                    registerFacebookCallback();
+                } else {
+                    Log.d("ckcc", "Profile is ok");
+                    startMainActivity();
+                }
+            }
+        });
     }
 
     @Override
@@ -50,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void registerFacebookCallback(){
+    private void registerFacebookCallback() {
         callbackManager = CallbackManager.Factory.create();
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
 
@@ -58,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(LoginResult loginResult) {
-                if(Profile.getCurrentProfile() == null){
+                if (Profile.getCurrentProfile() == null) {
                     profileTracker = new ProfileTracker() {
                         @Override
                         protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
@@ -66,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                             startMainActivity();
                         }
                     };
-                }else {
+                } else {
                     startMainActivity();
                 }
             }
@@ -83,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void startMainActivity(){
+    private void startMainActivity() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

@@ -26,6 +26,11 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SignupActivity" />
         <activity android:name=".activity.ProfileActivity" />
+
+        <provider android:authorities="com.facebook.app.FacebookContentProvider382164542124406"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

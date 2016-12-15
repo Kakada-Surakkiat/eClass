@@ -2,6 +2,8 @@ package kh.edu.rupp.ckcc.eclass.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -20,6 +22,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.model.SharePhotoContent;
+import com.facebook.share.widget.ShareDialog;
 
 import kh.edu.rupp.ckcc.eclass.R;
 import kh.edu.rupp.ckcc.eclass.utility.MyNetwork;
@@ -94,6 +100,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.menu5:
                 Toast.makeText(this, "on menu 5 click", Toast.LENGTH_LONG).show();
                 break;
+            case R.id.mnu_share:
+                shareToFacebook();
+                break;
         }
         return false;
     }
@@ -114,6 +123,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         MyNetwork.getInstance(this).addRequest(imageRequest);
+    }
+
+    private void shareToFacebook(){
+        ShareLinkContent.Builder builder = new ShareLinkContent.Builder();
+        builder.setContentUrl(Uri.parse("http://rupp.edu.kh"));
+        ShareLinkContent content = builder.build();
+
+        ShareDialog shareDialog = new ShareDialog(this);
+        shareDialog.show(content);
+    }
+
+    private void sharePhotoToFacebook(){
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_profile);
+        SharePhoto photo = new SharePhoto.Builder().setBitmap(bitmap).build();
+        SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(photo).build();
+        ShareDialog shareDialog = new ShareDialog(this);
+        shareDialog.show(content);
     }
 
 }
