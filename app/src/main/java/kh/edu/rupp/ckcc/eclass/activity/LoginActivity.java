@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -15,6 +14,7 @@ import com.facebook.Profile;
 import com.facebook.ProfileTracker;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import kh.edu.rupp.ckcc.eclass.R;
 
@@ -33,8 +33,10 @@ public class LoginActivity extends AppCompatActivity {
 
         FacebookSdk.sdkInitialize(this);
 
-        if(AccessToken.getCurrentAccessToken() == null){
+        if(Profile.getCurrentProfile() == null){
             setContentView(R.layout.activity_login);
+            LoginButton loginButton = (LoginButton)findViewById(R.id.btn_fb_login);
+            loginButton.setReadPermissions("public_profile", "email", "user_birthday");
             registerFacebookCallback();
         }else{
             startMainActivity();

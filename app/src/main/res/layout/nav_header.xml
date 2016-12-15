@@ -23,12 +23,12 @@
         android:text="@string/name" />
 
     <TextView
-        android:id="@+id/txt_edit"
+        android:id="@+id/txt_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="@string/edit" />
+        android:text="@string/view" />
 
     <TextView
         android:layout_width="wrap_content"

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/toolbar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profile"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/ic_profile" />
+
+        <TextView
+            android:id="@+id/txt_name"
+            style="@style/text_label"
+            android:layout_below="@id/img_profile"
+            android:text="@string/name" />
+
+        <TextView
+            style="@style/text_value"
+            android:layout_alignBaseline="@id/txt_name"
+            android:layout_alignParentRight="true"
+            android:text="@string/name"
+            android:id="@+id/txt_name_value" />
+
+        <TextView
+            android:id="@+id/txt_gender"
+            style="@style/text_label"
+            android:layout_below="@id/txt_name"
+            android:text="@string/gender" />
+
+        <TextView
+            style="@style/text_value"
+            android:layout_alignBaseline="@id/txt_gender"
+            android:layout_alignParentRight="true"
+            android:text="@string/gender"
+            android:id="@+id/txt_gender_value" />
+
+        <TextView
+            android:id="@+id/txt_dob"
+            style="@style/text_label"
+            android:layout_below="@id/txt_gender"
+            android:text="@string/dob" />
+
+        <TextView
+            style="@style/text_value"
+            android:layout_alignBaseline="@id/txt_dob"
+            android:layout_alignParentRight="true"
+            android:text="@string/dob"
+            android:id="@+id/txt_dob_value" />
+
+        <TextView
+            android:id="@+id/txt_email"
+            style="@style/text_label"
+            android:layout_below="@id/txt_dob"
+            android:text="@string/email" />
+
+        <TextView
+            style="@style/text_value"
+            android:layout_alignBaseline="@id/txt_email"
+            android:layout_alignParentRight="true"
+            android:text="@string/email"
+            android:id="@+id/txt_email_value" />
+
+    </RelativeLayout>
+
+</LinearLayout>

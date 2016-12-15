@@ -50,7 +50,7 @@ public class NavHeaderView extends RelativeLayout implements View.OnClickListene
         layoutInflater.inflate(R.layout.nav_header, this);
         imgProfile = (CircleImageView) findViewById(R.id.img_profile);
         txtUsername = (TextView) findViewById(R.id.txt_username);
-        findViewById(R.id.txt_edit).setOnClickListener(this);
+        findViewById(R.id.txt_view).setOnClickListener(this);
         findViewById(R.id.txt_logout).setOnClickListener(this);
     }
 
@@ -62,15 +62,15 @@ public class NavHeaderView extends RelativeLayout implements View.OnClickListene
         imgProfile.setImageResource(imageResId);
     }
 
-    public void setImage(Bitmap bitmap){
+    public void setImage(Bitmap bitmap) {
         imgProfile.setImageBitmap(bitmap);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.txt_edit) {
+        if (v.getId() == R.id.txt_view) {
             if (onNavHeaderItemClick != null) {
-                onNavHeaderItemClick.onEditClick();
+                onNavHeaderItemClick.onViewClick();
             }
         } else if (v.getId() == R.id.txt_logout) {
             if (onNavHeaderItemClick != null) {
@@ -80,7 +80,7 @@ public class NavHeaderView extends RelativeLayout implements View.OnClickListene
     }
 
     public interface OnNavHeaderItemClick {
-        void onEditClick();
+        void onViewClick();
 
         void onLogoutClick();
     }

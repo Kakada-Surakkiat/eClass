@@ -15,15 +15,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageRequest;
-import com.android.volley.toolbox.Volley;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 
 import kh.edu.rupp.ckcc.eclass.R;
+import kh.edu.rupp.ckcc.eclass.utility.MyNetwork;
 import kh.edu.rupp.ckcc.eclass.view.NavHeaderView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavHeaderView.OnNavHeaderItemClick, NavigationView.OnNavigationItemSelectedListener {
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         navigationView = (NavigationView) findViewById(R.id.navigationview);
@@ -63,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onEditClick() {
-        Toast.makeText(this, "on edit click", Toast.LENGTH_LONG).show();
+    public void onViewClick() {
+        Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu1:
                 Toast.makeText(this, "on menu 1 click", Toast.LENGTH_LONG).show();
                 break;
@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return false;
     }
 
-    private void setUserInfo(){
+    private void setUserInfo() {
         Profile profile = Profile.getCurrentProfile();
         navHeaderView.setUsername(profile.getName());
         String profileImageUrl = profile.getProfilePictureUri(120, 120).toString();
@@ -113,8 +113,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
         });
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(imageRequest);
+        MyNetwork.getInstance(this).addRequest(imageRequest);
     }
 
 }
