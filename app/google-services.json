@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "629266217912",
+    "firebase_url": "https://eclass-67c8c.firebaseio.com",
+    "project_id": "eclass-67c8c",
+    "storage_bucket": "eclass-67c8c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629266217912:android:8b7da322bc90cd2e",
+        "android_client_info": {
+          "package_name": "kh.edu.rupp.ckcc.eclass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629266217912-a2q0vej4827r6inlc97kg0mcrh5rkqf5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOaiqvwXPdV1SCS1DN93tMckov5kt9NYc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

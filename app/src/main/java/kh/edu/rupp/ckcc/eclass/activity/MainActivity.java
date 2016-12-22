@@ -26,6 +26,7 @@ import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
+import com.google.firebase.auth.FirebaseAuth;
 
 import kh.edu.rupp.ckcc.eclass.R;
 import kh.edu.rupp.ckcc.eclass.utility.MyNetwork;
@@ -77,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onLogoutClick() {
         Log.d("ckcc", "onLogoutClick");
         LoginManager.getInstance().logOut();
+        FirebaseAuth.getInstance().signOut();
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();
