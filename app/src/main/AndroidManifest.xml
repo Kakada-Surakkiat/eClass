@@ -3,6 +3,8 @@
     package="kh.edu.rupp.ckcc.eclass">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +17,14 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/fb_app_id" />
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_map_api_key" />
+
         <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +36,7 @@
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.SignupActivity" />
         <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.MapActivity" />
 
         <provider android:authorities="com.facebook.app.FacebookContentProvider382164542124406"
             android:name="com.facebook.FacebookContentProvider"

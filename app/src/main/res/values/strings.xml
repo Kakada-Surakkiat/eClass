@@ -17,7 +17,11 @@
     <string name="logout">Logout</string>
     <string name="view">View</string>
     <string name="share">Share</string>
+    <string name="map">Map</string>
+    <string name="ckcc">CKCC</string>
+    <string name="current_location">Current Location</string>
 
     <string name="fb_app_id">382164542124406</string>
+    <string name="google_map_api_key">AIzaSyA16LYd2-Aj2pyjhIhCM52WVcNG3S6XtgE</string>
 
 </resources>

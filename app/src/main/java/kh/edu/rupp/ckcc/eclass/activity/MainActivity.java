@@ -99,8 +99,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.menu4:
                 Toast.makeText(this, "on menu 4 click", Toast.LENGTH_LONG).show();
                 break;
-            case R.id.menu5:
-                Toast.makeText(this, "on menu 5 click", Toast.LENGTH_LONG).show();
+            case R.id.mnu_map:
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
                 break;
             case R.id.mnu_share:
                 shareToFacebook();
