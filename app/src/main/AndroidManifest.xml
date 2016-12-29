@@ -37,10 +37,13 @@
         <activity android:name=".activity.SignupActivity" />
         <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.MapActivity" />
+        <activity android:name=".activity.ContactActivity" />
+        <activity android:name=".activity.CkccMapActivity" />
 
-        <provider android:authorities="com.facebook.app.FacebookContentProvider382164542124406"
+        <provider
             android:name="com.facebook.FacebookContentProvider"
-            android:exported="true"/>
+            android:authorities="com.facebook.app.FacebookContentProvider382164542124406"
+            android:exported="true" />
 
     </application>
 

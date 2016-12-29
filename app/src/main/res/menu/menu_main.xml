@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/menu1"
-        android:title="Menu 1" />
-    <item
-        android:id="@+id/menu2"
-        android:title="Menu 2" />
-    <item
-        android:id="@+id/menu3"
-        android:title="Menu 3" />
-    <item
-        android:id="@+id/menu4"
-        android:title="Menu 4" />
-    <item
-        android:id="@+id/mnu_map"
-        android:title="@string/map" />
-    <item
-        android:id="@+id/mnu_share"
-        android:title="@string/share" />
+    <group android:id="@+id/grp_main_menu">
+
+        <item
+            android:id="@+id/menu1"
+            android:title="Menu 1" />
+        <item
+            android:id="@+id/menu2"
+            android:title="Menu 2" />
+        <item
+            android:id="@+id/mnu_share"
+            android:title="@string/share" />
+
+    </group>
+
+    <group android:id="@+id/grp_about">
+        <item
+            android:id="@+id/mnu_contact"
+            android:title="@string/contact" />
+    </group>
 
 </menu>

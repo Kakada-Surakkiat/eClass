@@ -8,6 +8,10 @@
     <string name="email">Email</string>
     <string name="major">Major</string>
     <string name="address">Address</string>
+    <string name="contact">Contact</string>
+    <string name="ckcc_address">The Royal University of Phnom Penh, Russian Federation Boulevard
+Toul Kork, Phnom Penh, Cambodia.
+T</string>
 
     <!-- Action -->
     <string name="signup">Signup</string>
@@ -22,6 +26,6 @@
     <string name="current_location">Current Location</string>
 
     <string name="fb_app_id">382164542124406</string>
-    <string name="google_map_api_key">AIzaSyA16LYd2-Aj2pyjhIhCM52WVcNG3S6XtgE</string>
+    <string name="google_map_api_key">AIzaSyDOaiqvwXPdV1SCS1DN93tMckov5kt9NYc</string>
 
 </resources>

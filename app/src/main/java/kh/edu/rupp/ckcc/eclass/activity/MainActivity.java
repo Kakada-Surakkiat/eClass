@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -87,24 +86,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu1:
-                Toast.makeText(this, "on menu 1 click", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.menu2:
-                Toast.makeText(this, "on menu 2 click", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.menu3:
-                Toast.makeText(this, "on menu 3 click", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.menu4:
-                Toast.makeText(this, "on menu 4 click", Toast.LENGTH_LONG).show();
-                break;
-            case R.id.mnu_map:
-                Intent intent = new Intent(this, MapActivity.class);
-                startActivity(intent);
-                break;
             case R.id.mnu_share:
                 shareToFacebook();
+                break;
+            case R.id.mnu_contact:
+                startActivity(new Intent(this, ContactActivity.class));
                 break;
         }
         return false;
@@ -128,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MyNetwork.getInstance(this).addRequest(imageRequest);
     }
 
-    private void shareToFacebook(){
+    private void shareToFacebook() {
         ShareLinkContent.Builder builder = new ShareLinkContent.Builder();
         builder.setContentUrl(Uri.parse("http://rupp.edu.kh"));
         ShareLinkContent content = builder.build();
@@ -137,7 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         shareDialog.show(content);
     }
 
-    private void sharePhotoToFacebook(){
+    private void sharePhotoToFacebook() {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_profile);
         SharePhoto photo = new SharePhoto.Builder().setBitmap(bitmap).build();
         SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(photo).build();
