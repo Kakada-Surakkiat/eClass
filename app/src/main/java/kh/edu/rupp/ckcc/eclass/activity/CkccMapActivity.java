@@ -1,6 +1,8 @@
 package kh.edu.rupp.ckcc.eclass.activity;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -30,7 +33,7 @@ import kh.edu.rupp.ckcc.eclass.R;
  * Created by leapkh on 29/12/16.
  */
 
-public class CkccMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, View.OnClickListener, LocationListener {
+public class CkccMapActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, View.OnClickListener, LocationListener, GoogleMap.OnMapLongClickListener {
 
     private final double CKCC_LATITUDE = 11.568930;
     private final double CKCC_LONGTITUDE = 104.888426;
@@ -110,6 +113,8 @@ public class CkccMapActivity extends AppCompatActivity implements OnMapReadyCall
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
+        map.setOnMapLongClickListener(this);
+        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
         addCkccMarker();
     }
@@ -133,6 +138,7 @@ public class CkccMapActivity extends AppCompatActivity implements OnMapReadyCall
         markerOptions.title(title);
         markerOptions.snippet(text);
         markerOptions.position(position);
+        markerOptions.draggable(true);
         map.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(position, 15);
@@ -188,5 +194,22 @@ public class CkccMapActivity extends AppCompatActivity implements OnMapReadyCall
         Log.d("ckcc", "onLocationChanged");
         addMyLocationMarker(location);
         LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
+    }
+
+    @Override
+    public void onMapLongClick(final LatLng latLng) {
+        //addMarker("Select Location", "", latLng);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        final EditText editText = new EditText(this);
+        builder.setTitle("Please input your location name:");
+        builder.setView(editText);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Log.d("ckcc", "User input: " + editText.getText());
+                addMarker("User Input", editText.getText().toString(), latLng);
+            }
+        });
+        builder.show();
     }
 }
