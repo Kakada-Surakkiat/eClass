@@ -28,6 +28,7 @@ import com.facebook.share.widget.ShareDialog;
 import com.google.firebase.auth.FirebaseAuth;
 
 import kh.edu.rupp.ckcc.eclass.R;
+import kh.edu.rupp.ckcc.eclass.fragment.CoursesFragment;
 import kh.edu.rupp.ckcc.eclass.utility.MyNetwork;
 import kh.edu.rupp.ckcc.eclass.view.NavHeaderView;
 
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         setUserInfo();
 
+        showCourses();
+
     }
 
     @Override
@@ -83,9 +86,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         finish();
     }
 
+    private void showCourses(){
+        Log.d("ckcc", "Show courses");
+        CoursesFragment fragment = new CoursesFragment();
+        getFragmentManager().beginTransaction().replace(R.id.frm_content, fragment).commit();
+        drawerLayout.closeDrawers();
+    }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.mnu_courses:
+                showCourses();
+                break;
             case R.id.mnu_share:
                 shareToFacebook();
                 break;

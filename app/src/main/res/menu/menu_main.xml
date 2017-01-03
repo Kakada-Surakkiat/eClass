@@ -4,8 +4,9 @@
     <group android:id="@+id/grp_main_menu">
 
         <item
-            android:id="@+id/menu1"
-            android:title="Menu 1" />
+            android:id="@+id/mnu_courses"
+            android:checked="true"
+            android:title="@string/courses" />
         <item
             android:id="@+id/menu2"
             android:title="Menu 2" />

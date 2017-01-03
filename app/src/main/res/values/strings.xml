@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">eClass</string>
 
+    <string name="courses">Courses</string>
+
     <string name="name">Name</string>
     <string name="gender">Gender</string>
     <string name="dob">Date of birth</string>
