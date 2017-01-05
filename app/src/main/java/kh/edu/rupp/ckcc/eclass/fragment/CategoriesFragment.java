@@ -1,6 +1,7 @@
 package kh.edu.rupp.ckcc.eclass.fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import kh.edu.rupp.ckcc.eclass.R;
+import kh.edu.rupp.ckcc.eclass.activity.AddCategoryActivity;
+import kh.edu.rupp.ckcc.eclass.activity.CategoryActivity;
 import kh.edu.rupp.ckcc.eclass.vo.Category;
 
 /**
@@ -22,9 +25,11 @@ import kh.edu.rupp.ckcc.eclass.vo.Category;
  * Created by leapkh on 3/1/17.
  */
 
-public class CoursesFragment extends Fragment {
+public class CategoriesFragment extends Fragment implements View.OnClickListener {
 
     private final String REF_CATEGORIES = "categories";
+    public static final String EXTRA_CATEGORY_KEY = "category-key";
+    public static final String EXTRA_CATEGORY_NAME = "category-name";
 
     private RecyclerView recyclerView;
     private FirebaseRecyclerAdapter<Category, CategoryViewHolder> adapter;
@@ -44,41 +49,37 @@ public class CoursesFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new FirebaseRecyclerAdapter<Category, CategoryViewHolder>(Category.class, R.layout.listitem_category, CategoryViewHolder.class, categoriesRef) {
             @Override
-            protected void populateViewHolder(CategoryViewHolder viewHolder, Category model, int position) {
+            protected void populateViewHolder(CategoryViewHolder viewHolder, final Category model, final int position) {
                 viewHolder.txtName.setText(model.getName());
                 viewHolder.txtDescription.setText(model.getDescription());
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String key = getRef(position).getKey();
+                        Intent intent = new Intent(getActivity(), CategoryActivity.class);
+                        intent.putExtra(EXTRA_CATEGORY_KEY, key);
+                        intent.putExtra(EXTRA_CATEGORY_NAME, model.getName());
+                        startActivity(intent);
+                    }
+                });
             }
         };
         recyclerView.setAdapter(adapter);
+
+        view.findViewById(R.id.btn_add).setOnClickListener(this);
 
         return view;
 
     }
 
-    /*
-    private void processLoadCategories(){
-        rootRef = FirebaseDatabase.getInstance().getReference();
-        categoriesRef = rootRef.child(REF_CATEGORIES);
-        categoriesRef.addListenerForSingleValueEvent(this);
-    }
-
-
     @Override
-    public void onDataChange(DataSnapshot dataSnapshot) {
-        Log.d("ckcc", "onDataChange");
-        for(DataSnapshot childSnapshot:dataSnapshot.getChildren()){
-            Category category = childSnapshot.getValue(Category.class);
-            Log.d("ckcc", "Cat name: " + category.getName());
+    public void onClick(View v) {
+        if(v.getId() == R.id.btn_add){
+            startActivity(new Intent(getActivity(), AddCategoryActivity.class));
         }
     }
 
-    @Override
-    public void onCancelled(DatabaseError databaseError) {
-
-    }
-
-*/
-    public static class CategoryViewHolder extends RecyclerView.ViewHolder{
+    public static class CategoryViewHolder extends RecyclerView.ViewHolder {
 
         public TextView txtName;
         public TextView txtDescription;
@@ -89,7 +90,8 @@ public class CoursesFragment extends Fragment {
             txtName = (TextView)itemView.findViewById(R.id.txt_name);
             txtDescription = (TextView)itemView.findViewById(R.id.txt_description);
         }
-
     }
+
+
 
 }

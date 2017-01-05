@@ -2,7 +2,6 @@ package kh.edu.rupp.ckcc.eclass.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +13,6 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
@@ -56,25 +54,13 @@ public class LoginActivity extends AppCompatActivity {
                     startMainActivity();
                 } else {
                     Log.d("ckcc", "onAuthStateChanged:signed_out");
-                }
-            }
-        };
-
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                if (Profile.getCurrentProfile() == null) {
-                    Log.d("ckcc", "Profile is null");
                     setContentView(R.layout.activity_login);
                     LoginButton loginButton = (LoginButton) findViewById(R.id.btn_fb_login);
                     loginButton.setReadPermissions("public_profile", "email", "user_birthday", "user_friends");
                     registerFacebookCallback();
-                } else {
-                    Log.d("ckcc", "Profile is ok");
-                    startMainActivity();
                 }
             }
-        });
+        };
     }
 
     @Override

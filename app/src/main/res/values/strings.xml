@@ -2,8 +2,10 @@
     <string name="app_name">eClass</string>
 
     <string name="courses">Courses</string>
+    <string name="add_category">Add New Category</string>
 
     <string name="name">Name</string>
+    <string name="description">Description</string>
     <string name="gender">Gender</string>
     <string name="dob">Date of birth</string>
     <string name="phone">Phone</string>
@@ -17,15 +19,20 @@ T</string>
 
     <!-- Action -->
     <string name="signup">Signup</string>
+    <string name="add">Add</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="edit">Edit</string>
     <string name="logout">Logout</string>
     <string name="view">View</string>
     <string name="share">Share</string>
+    <string name="register">Register</string>
     <string name="map">Map</string>
     <string name="ckcc">CKCC</string>
     <string name="current_location">Current Location</string>
+
+    <string name="msg_item_exists">This item is already existed.</string>
+    <string name="msg_add_success">Add success.</string>
 
     <string name="fb_app_id">382164542124406</string>
     <string name="google_map_api_key">AIzaSyDOaiqvwXPdV1SCS1DN93tMckov5kt9NYc</string>
