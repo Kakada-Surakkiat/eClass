@@ -23,8 +23,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import kh.edu.rupp.ckcc.eclass.R;
+import kh.edu.rupp.ckcc.eclass.app.AppConstant;
 
 /**
  * eClass
@@ -92,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess(LoginResult loginResult) {
+                FirebaseMessaging.getInstance().subscribeToTopic(AppConstant.FIREBASE_TOPIC_ANDROID_USER);
                 handleFacebookAccessToken(loginResult.getAccessToken());
             }
 

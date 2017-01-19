@@ -10,6 +10,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import kh.edu.rupp.ckcc.eclass.R;
@@ -39,7 +40,7 @@ public class AddCategoryActivity extends ToolbarActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         if(v.getId() == R.id.btn_add){
-            addCategory();
+            processAddCategory();
         }
     }
 
@@ -55,28 +56,23 @@ public class AddCategoryActivity extends ToolbarActivity implements View.OnClick
         categoryRef = FirebaseDatabase.getInstance().getReference(AppConstant.REF_CATEGORIES);
     }
 
-    private void addCategory(){
-        categoryRef.orderByChild(AppConstant.REF_NAME).equalTo(etxtName.getText().toString().trim());
-        categoryRef.addListenerForSingleValueEvent(this);
+    private void processAddCategory(){
+        Query query = categoryRef.orderByChild(AppConstant.REF_NAME).equalTo(etxtName.getText().toString().trim());
+        query.addListenerForSingleValueEvent(this);
+    }
+
+    private void addCategory(Category category){
+
     }
 
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
-        boolean isCategoryExist = false;
-        String categoryName = etxtName.getText().toString().trim();
-        for (DataSnapshot snapshot:dataSnapshot.getChildren()){
-            Category category = snapshot.getValue(Category.class);
-            if(category.getName().equals(categoryName)){
-                isCategoryExist = true;
-                break;
-            }
-        }
-        if(isCategoryExist){
-            showLongToast(R.string.msg_item_exists);
-        }else{
+        if(dataSnapshot.getChildrenCount()==0){
+            String categoryName = etxtName.getText().toString().trim();
             Category category = new Category(categoryName, etxtDescription.getText().toString());
-            categoryRef.push().setValue(category);
-            categoryRef.addChildEventListener(this);
+            addCategory(category);
+        }else{
+            showLongToast(R.string.msg_item_exists);
         }
     }
 

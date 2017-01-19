@@ -44,6 +44,19 @@
         <activity android:name=".activity.AddCategoryActivity" />
         <activity android:name=".activity.CourseActivity" />
 
+        <service android:name=".service.EclassInstanceIdService">
+            <intent-filter>       
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+
+        </service>
+
+        <service android:name=".service.EclassMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <provider
             android:name="com.facebook.FacebookContentProvider"
             android:authorities="com.facebook.app.FacebookContentProvider382164542124406"

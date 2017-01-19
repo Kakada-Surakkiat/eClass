@@ -15,6 +15,7 @@ public class User {
     private String gender;
     private String email;
     private String dob;
+    private boolean isUploadedProfile;
 
     public static User fromJson(JSONObject object){
         User user = new User();
@@ -67,5 +68,14 @@ public class User {
 
     public void setDob(String dob) {
         this.dob = dob;
+    }
+
+    public boolean isUploadedProfile() {
+        //return isUploadedProfile;
+        return true;
+    }
+
+    public void setUploadedProfile(boolean uploadedProfile) {
+        isUploadedProfile = uploadedProfile;
     }
 }

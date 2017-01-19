@@ -14,4 +14,6 @@ public interface AppConstant {
     String REF_USER = "user";
     String REF_USER_COURSE = "user-course";
 
+    String FIREBASE_TOPIC_ANDROID_USER = "android";
+
 }
