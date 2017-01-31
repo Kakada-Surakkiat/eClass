@@ -27,6 +27,7 @@ T</string>
     <string name="view">View</string>
     <string name="share">Share</string>
     <string name="register">Register</string>
+    <string name="comment">Comment</string>
     <string name="map">Map</string>
     <string name="ckcc">CKCC</string>
     <string name="current_location">Current Location</string>

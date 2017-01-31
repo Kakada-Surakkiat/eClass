@@ -10,6 +10,8 @@ public interface AppConstant {
     String REF_CATEGORY = "category";
     String REF_CATEGORIES = "categories";
     String REF_COURSES = "courses";
+    String REF_COURSE = "course";
+    String REF_COMMENTS = "comments";
     String REF_NAME = "name";
     String REF_USER = "user";
     String REF_USER_COURSE = "user-course";

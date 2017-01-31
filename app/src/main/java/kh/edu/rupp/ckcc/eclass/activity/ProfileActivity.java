@@ -75,25 +75,25 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == CHOOSE_IMAGE_REQUEST_CODE && resultCode == RESULT_OK){
+        if (requestCode == CHOOSE_IMAGE_REQUEST_CODE && resultCode == RESULT_OK) {
             setImageFromGallery(data.getData());
             uploadImage(data.getData());
         }
     }
 
-    private void setProfileImage(){
-        if(user.isUploadedProfile()){
+    private void setProfileImage() {
+        if (user.isUploadedProfile()) {
             setProfileImageFromFirebase();
-        }else{
+        } else {
             setProfileImageFromFacebook();
         }
     }
 
-    private void setProfileImageFromFirebase(){
+    private void setProfileImageFromFirebase() {
         String fileName = user.getId() + ".jpg";
         String referenceString = "images/" + fileName;
         StorageReference profileImageRef = FirebaseStorage.getInstance().getReference(referenceString);
-        profileImageRef.getBytes(1024*1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
+        profileImageRef.getBytes(1024 * 1024).addOnCompleteListener(new OnCompleteListener<byte[]>() {
             @Override
             public void onComplete(@NonNull Task<byte[]> task) {
                 Bitmap bitmap = convertBytesToBitmap(task.getResult());
@@ -102,18 +102,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         });
     }
 
-    private Bitmap convertBytesToBitmap(byte[] bytes){
+    private Bitmap convertBytesToBitmap(byte[] bytes) {
         Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         return bitmap;
     }
 
-    private void setProfileImageFromFacebook(){
+    private void setProfileImageFromFacebook() {
         Profile profile = Profile.getCurrentProfile();
         String profileImageUrl = profile.getProfilePictureUri(120, 120).toString();
         setProfileImageFromUrl(profileImageUrl);
     }
 
-    private void setProfileImageFromUrl(String imageUrl){
+    private void setProfileImageFromUrl(String imageUrl) {
         Log.d("ckcc", "setProfileImageFromUrl: " + imageUrl);
         ImageRequest imageRequest = new ImageRequest(imageUrl, new Response.Listener<Bitmap>() {
             @Override
@@ -130,9 +130,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-
-    private void loadProfileInfo(){
-        if(Utils.getUser(this) == null){
+    private void loadProfileInfo() {
+        if (Utils.getUser(this) == null) {
             Log.d("ckcc", "load profile from facebook");
             AccessToken token = AccessToken.getCurrentAccessToken();
             GraphRequest graphRequest = GraphRequest.newMeRequest(token, new GraphRequest.GraphJSONObjectCallback() {
@@ -148,14 +147,14 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             params.putString("fields", "name, email, birthday, gender");
             graphRequest.setParameters(params);
             graphRequest.executeAsync();
-        }else{
+        } else {
             Log.d("ckcc", "Use profile from preferene");
             User user = Utils.getUser(this);
             setProfileInfo(user);
         }
     }
 
-    private void setProfileInfo(User user){
+    private void setProfileInfo(User user) {
         txtName.setText(user.getName());
         txtGender.setText(user.getGender());
         txtEmail.setText(user.getEmail());
@@ -163,28 +162,24 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.img_profile){
+        if (v.getId() == R.id.img_profile) {
             chooseImageFromGallery();
         }
     }
 
-    private void chooseImageFromGallery(){
+    private void chooseImageFromGallery() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, CHOOSE_IMAGE_REQUEST_CODE);
     }
 
-    private void setImageFromGallery(Uri selectedImage){
-        try {
-            Bitmap bitmap = decodeUri(selectedImage, 200);
-            imgProfile.setImageBitmap(bitmap);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    private void setImageFromGallery(Uri selectedImage) {
+        Bitmap bitmap = Utils.decodeUri(this, selectedImage, 200);
+        imgProfile.setImageBitmap(bitmap);
     }
 
-    private void uploadImage(Uri selectedImage){
+    private void uploadImage(Uri selectedImage) {
         User user = Utils.getUser(this);
         String fileName = user.getId() + ".jpg";
         String referenceString = "images/" + fileName;
@@ -209,30 +204,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    private Bitmap decodeUri(Uri selectedImage, int size) throws FileNotFoundException {
 
-        // Decode image size
-        BitmapFactory.Options o = new BitmapFactory.Options();
-        o.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o);
-
-        // Find the correct scale value. It should be the power of 2.
-        int width_tmp = o.outWidth, height_tmp = o.outHeight;
-        int scale = 1;
-        while (true) {
-            if (width_tmp / 2 < size || height_tmp / 2 < size) {
-                break;
-            }
-            width_tmp /= 2;
-            height_tmp /= 2;
-            scale *= 2;
-        }
-
-        // Decode with inSampleSize
-        BitmapFactory.Options o2 = new BitmapFactory.Options();
-        o2.inSampleSize = scale;
-        return BitmapFactory.decodeStream(getContentResolver().openInputStream(selectedImage), null, o2);
-
-    }
 
 }
